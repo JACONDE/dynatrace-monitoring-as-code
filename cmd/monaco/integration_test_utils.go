@@ -101,7 +101,7 @@ func getTransformerFunc(suffix string) func(line string) string {
 }
 
 // Deletes all configs that end with "_suffix", where suffix == suffixTest+suffixTimestamp
-func cleanupIntegrationTest(t *testing.T, configFolder, envFile, suffix string, integrationTestReader util.FileReader) {
+func cleanupIntegrationTest(t *testing.T, envFile, suffix string, integrationTestReader util.FileReader) {
 
 	environments, errs := environment.LoadEnvironmentList("", envFile, integrationTestReader)
 	FailOnAnyError(errs, "loading of environments failed")
@@ -150,5 +150,5 @@ func RunIntegrationWithCleanup(t *testing.T, configFolder, envFile, suffixTest s
 	assert.NilError(t, err)
 
 	testFunc(integrationTestReader)
-	cleanupIntegrationTest(t, configFolder, envFile, suffix, integrationTestReader)
+	cleanupIntegrationTest(t, envFile, suffix, integrationTestReader)
 }
